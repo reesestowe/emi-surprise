@@ -14,7 +14,7 @@
         body {
             font-family: 'Arial', sans-serif;
             overflow: hidden;
-            background: linear-gradient(to bottom, #87CEEB 0%, #E0F6FF 50%, #98D8C8 100%);
+            background: linear-gradient(to bottom, #87CEEB 0%, #B8D4F1 40%, #E0F6FF 70%, #98D8C8 100%);
         }
 
         canvas {
@@ -29,7 +29,7 @@
             left: 50%;
             transform: translateX(-50%);
             font-size: 32px;
-            color: #2C5F2D;
+            color: #4169E1;
             text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8);
             font-weight: bold;
             z-index: 10;
@@ -69,8 +69,27 @@
             cursor: pointer;
         }
 
+        .control-group input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #4169E1;
+            cursor: pointer;
+        }
+
+        .control-group input[type="range"]::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #4169E1;
+            cursor: pointer;
+            border: none;
+        }
+
         .value-display {
-            color: #4A90A4;
+            color: #4169E1;
             font-weight: bold;
             font-size: 14px;
         }
@@ -176,13 +195,13 @@
 
             getRandomBirdColor() {
                 const colors = [
-                    '#FF6B6B', // Red
+                    '#4169E1', // Royal Blue (Emi's favorite!)
+                    '#4169E1', // Royal Blue (higher chance)
+                    '#5B7FE8', // Lighter Royal Blue
+                    '#2E4A9F', // Darker Royal Blue
                     '#4ECDC4', // Teal
-                    '#45B7D1', // Blue
-                    '#FFA07A', // Salmon
-                    '#98D8C8', // Mint
                     '#FFD93D', // Yellow
-                    '#6C5CE7', // Purple
+                    '#FFA07A', // Salmon
                     '#A8E6CF'  // Light green
                 ];
                 return colors[Math.floor(Math.random() * colors.length)];
