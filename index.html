@@ -327,17 +327,17 @@
             }
 
             draw() {
-                // Trunk
-                ctx.fillStyle = '#8B4513';
+                // Trunk - dark blue instead of brown
+                ctx.fillStyle = '#2C4A7C';
                 ctx.fillRect(this.x - this.size * 0.15, this.y, this.size * 0.3, this.size * 1.2);
 
-                // Foliage
-                ctx.fillStyle = '#2D7A2E';
+                // Foliage - various blue shades instead of green
+                ctx.fillStyle = '#4169E1';  // Royal blue
                 ctx.beginPath();
                 ctx.arc(this.x, this.y - this.size * 0.2, this.size * 0.8, 0, Math.PI * 2);
                 ctx.fill();
 
-                ctx.fillStyle = '#3A9F3C';
+                ctx.fillStyle = '#5B7FE8';  // Lighter royal blue
                 ctx.beginPath();
                 ctx.arc(this.x - this.size * 0.4, this.y, this.size * 0.6, 0, Math.PI * 2);
                 ctx.fill();
@@ -382,20 +382,21 @@
             // Sky gradient background (already set in CSS, but we'll add grass)
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            // Draw grass/ground with royal blue tint
+            // Draw grass/ground in blue shades
             const groundHeight = canvas.height * 0.25;
             const gradient = ctx.createLinearGradient(0, canvas.height - groundHeight, 0, canvas.height);
-            gradient.addColorStop(0, '#6FA890');
-            gradient.addColorStop(0.5, '#5A9F7A');
-            gradient.addColorStop(1, '#4A8F6A');
+            gradient.addColorStop(0, '#5B9BD5');  // Medium blue
+            gradient.addColorStop(0.5, '#4A7BB7'); // Darker blue
+            gradient.addColorStop(1, '#3B5998');   // Deep blue
             ctx.fillStyle = gradient;
             ctx.fillRect(0, canvas.height - groundHeight, canvas.width, groundHeight);
 
-            // Add royal blue flowers in grass
-            for (let i = 0; i < 20; i++) {
+            // Add various blue flowers in grass
+            for (let i = 0; i < 30; i++) {
                 const fx = Math.random() * canvas.width;
                 const fy = canvas.height - Math.random() * groundHeight * 0.7;
-                ctx.fillStyle = '#4169E1';
+                const flowerColors = ['#4169E1', '#87CEEB', '#5B7FE8', '#6A8FEC', '#B0C4DE'];
+                ctx.fillStyle = flowerColors[Math.floor(Math.random() * flowerColors.length)];
                 ctx.beginPath();
                 ctx.arc(fx, fy, 3, 0, Math.PI * 2);
                 ctx.fill();
