@@ -14,7 +14,7 @@
         body {
             font-family: 'Arial', sans-serif;
             overflow: hidden;
-            background: linear-gradient(to bottom, #87CEEB 0%, #B8D4F1 40%, #E0F6FF 70%, #98D8C8 100%);
+            background: linear-gradient(to bottom, #6FA8DC 0%, #9FC5E8 25%, #B8D4F1 50%, #C9DAF8 75%, #A8C7FA 100%);
         }
 
         canvas {
@@ -41,10 +41,11 @@
             bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             padding: 15px 25px;
             border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            border: 3px solid #4169E1;
+            box-shadow: 0 4px 20px rgba(65, 105, 225, 0.4);
             display: flex;
             gap: 20px;
             align-items: center;
@@ -165,7 +166,13 @@
             }
 
             draw() {
-                ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
+                // Add subtle royal blue tint to some clouds
+                const blueChance = Math.random();
+                if (blueChance > 0.6) {
+                    ctx.fillStyle = `rgba(135, 169, 245, ${this.opacity * 0.6})`;
+                } else {
+                    ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
+                }
 
                 // Draw cloud using circles
                 ctx.beginPath();
@@ -196,12 +203,14 @@
             getRandomBirdColor() {
                 const colors = [
                     '#4169E1', // Royal Blue (Emi's favorite!)
-                    '#4169E1', // Royal Blue (higher chance)
+                    '#4169E1', // Royal Blue
+                    '#4169E1', // Royal Blue
+                    '#5B7FE8', // Lighter Royal Blue
                     '#5B7FE8', // Lighter Royal Blue
                     '#2E4A9F', // Darker Royal Blue
-                    '#4ECDC4', // Teal
+                    '#6A8FEC', // Soft Royal Blue
+                    '#4169E1', // Royal Blue (extra chance!)
                     '#FFD93D', // Yellow
-                    '#FFA07A', // Salmon
                     '#A8E6CF'  // Light green
                 ];
                 return colors[Math.floor(Math.random() * colors.length)];
@@ -372,13 +381,24 @@
             // Sky gradient background (already set in CSS, but we'll add grass)
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            // Draw grass/ground
+            // Draw grass/ground with royal blue tint
             const groundHeight = canvas.height * 0.25;
             const gradient = ctx.createLinearGradient(0, canvas.height - groundHeight, 0, canvas.height);
-            gradient.addColorStop(0, '#7FB77E');
-            gradient.addColorStop(1, '#5A9F5A');
+            gradient.addColorStop(0, '#6FA890');
+            gradient.addColorStop(0.5, '#5A9F7A');
+            gradient.addColorStop(1, '#4A8F6A');
             ctx.fillStyle = gradient;
             ctx.fillRect(0, canvas.height - groundHeight, canvas.width, groundHeight);
+
+            // Add royal blue flowers in grass
+            for (let i = 0; i < 20; i++) {
+                const fx = Math.random() * canvas.width;
+                const fy = canvas.height - Math.random() * groundHeight * 0.7;
+                ctx.fillStyle = '#4169E1';
+                ctx.beginPath();
+                ctx.arc(fx, fy, 3, 0, Math.PI * 2);
+                ctx.fill();
+            }
 
             // Update and draw clouds
             clouds.forEach(cloud => {
